@@ -4,7 +4,8 @@ include 'conn.php';
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-$sql = "SELECT 
+$sql = "SELECT
+    t.id,
     t.invoice,
     t.tanggal_order,
     c.name AS customer_name,
