@@ -11,7 +11,7 @@
       },
       {
         "src": "/",
-        "dest": "/api/conn.php"
+        "dest": "/api/index.php"
       }
     ]
   }
