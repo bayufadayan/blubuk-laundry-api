@@ -7,16 +7,16 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Mengambil data dari POST
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     $status_bayar = isset($_POST['status_bayar']) ? $connect->real_escape_string($_POST['status_bayar']) : '';
+    $connect->query("SET time_zone = '+07:00';");
 
-    // Validasi input
     if ($id > 0 && !empty($status_bayar)) {
-        // Query untuk memperbarui data transaksi
+        // versi lokal
         $sql = "UPDATE transaction SET status_bayar = '$status_bayar' WHERE id = $id";
+        // versi production
+        // $sql = "UPDATE transaction SET status_bayar = '$status_bayar', tanggal_bayar = IF(status_bayar = 'Lunas', CURRENT_TIMESTAMP, NULL) WHERE id =  $id;";
 
-        // Eksekusi query
         if ($connect->query($sql) === TRUE) {
             echo json_encode(["status" => "success", "message" => "Data transaksi berhasil diperbarui"]);
         } else {
