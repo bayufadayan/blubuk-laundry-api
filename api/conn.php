@@ -1,9 +1,9 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "blubuklaundry";
-$port = 3306;
+$host = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASS');
+$dbname = getenv('DB_NAME');
+$port = getenv('DB_PORT');
 
 $connect = new mysqli($host, $user, $password, $dbname, $port);
 

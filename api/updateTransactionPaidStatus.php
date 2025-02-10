@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($id > 0 && !empty($status_bayar)) {
         // versi lokal
-        $sql = "UPDATE transaction SET status_bayar = '$status_bayar' WHERE id = $id";
+        // $sql = "UPDATE transaction SET status_bayar = '$status_bayar' WHERE id = $id";
         // versi production
-        // $sql = "UPDATE transaction SET status_bayar = '$status_bayar', tanggal_bayar = IF(status_bayar = 'Lunas', CURRENT_TIMESTAMP, NULL) WHERE id =  $id;";
+        $sql = "UPDATE transaction SET status_bayar = '$status_bayar', tanggal_bayar = IF(status_bayar = 'Lunas', CURRENT_TIMESTAMP, NULL) WHERE id =  $id;";
 
         if ($connect->query($sql) === TRUE) {
             echo json_encode(["status" => "success", "message" => "Data transaksi berhasil diperbarui"]);
